@@ -25,6 +25,13 @@ class AnimatedSplash extends React.Component {
     const { loadingProgress } = this.state;
     const { isLoaded } = this.props;
 
+    if (!isLoaded && prevProps.isLoaded) {
+      this.setState({
+        loadingProgress: new Animated.Value(0),
+        animationDone: false
+      });
+    }
+
     if (isLoaded && !prevProps.isLoaded) {
       Animated.timing(loadingProgress, {
         toValue: 100,
